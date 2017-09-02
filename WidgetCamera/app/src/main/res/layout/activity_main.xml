@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.denisgabyshev.widgetcamera.MainActivity">
@@ -14,7 +15,19 @@
 
     <Button
         android:id="@+id/picture"
-        android:text="check"
+        android:text="takePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/check"
+        android:text="runnnig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/stop"
+        android:text="stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

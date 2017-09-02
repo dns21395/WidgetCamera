@@ -25,7 +25,6 @@ class AppCamera16(context: Context)  {
 
     init {
         (context.applicationContext as App).component.inject(this)
-        setupCamera()
     }
 
     private var camera: Camera? = null
@@ -79,7 +78,7 @@ class AppCamera16(context: Context)  {
         return mediaFile
     }
 
-    fun closeCamera() {
+    fun destroyCamera() {
         camera?.stopPreview()
         camera?.release()
         camera = null

@@ -3,6 +3,7 @@ package com.example.denisgabyshev.widgetcamera.injection
 import com.example.denisgabyshev.widgetcamera.App
 import com.example.denisgabyshev.widgetcamera.camera.AppCamera16
 import com.example.denisgabyshev.widgetcamera.model.UserPreferences
+import com.example.denisgabyshev.widgetcamera.rx.RxBus
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -16,4 +17,6 @@ import javax.inject.Singleton
     @Provides @Singleton fun provideCamera() = AppCamera16(app)
 
     @Provides @Singleton fun providePrefernces() = UserPreferences(app)
+
+    @Provides @Singleton fun provideRx() = RxBus()
 }
