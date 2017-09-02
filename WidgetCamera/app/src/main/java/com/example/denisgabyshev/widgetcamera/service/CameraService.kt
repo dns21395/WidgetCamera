@@ -5,8 +5,10 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.IBinder
+import android.support.v4.app.NotificationCompat
 import android.util.Log
 import com.example.denisgabyshev.widgetcamera.App
+import com.example.denisgabyshev.widgetcamera.R
 import com.example.denisgabyshev.widgetcamera.camera.AppCamera16
 import com.example.denisgabyshev.widgetcamera.rx.RxBus
 import io.reactivex.disposables.CompositeDisposable
@@ -17,8 +19,8 @@ import javax.inject.Inject
  */
 class CameraService : Service() {
     companion object {
-        fun isRunning(context: Context, serviceClass: Class<*>): Boolean {
-            val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        fun isRunning(context: Context?, serviceClass: Class<*>): Boolean {
+            val manager = context?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
             return manager.getRunningServices(Integer.MAX_VALUE).any { serviceClass.name == it.service.className }
         }
     }
@@ -36,6 +38,7 @@ class CameraService : Service() {
 
         camera.setupCamera()
         subscribe()
+        showNotification()
 
     }
 
@@ -56,9 +59,20 @@ class CameraService : Service() {
 
     override fun onDestroy() {
         Log.d(TAG, "onDestroy")
+        stopForeground(true)
         subscriptions.clear()
         camera.destroyCamera()
         super.onDestroy()
+    }
+
+    private fun showNotification() {
+        val notification = NotificationCompat.Builder(applicationContext)
+                .setSmallIcon(R.drawable.ic_photo_camera_white_24dp)
+                .setContentTitle("Taking pictures")
+                .setSubText("Sub text")
+                .build()
+
+        startForeground(1337, notification)
     }
 
 }
