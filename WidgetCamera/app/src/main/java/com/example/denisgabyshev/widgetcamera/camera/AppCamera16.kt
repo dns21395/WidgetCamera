@@ -15,6 +15,7 @@ import com.example.denisgabyshev.widgetcamera.rx.RxBus
 import com.example.denisgabyshev.widgetcamera.service.ServiceControl
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,7 +23,7 @@ import java.util.*
 /**
  * Created by denisgabyshev on 01/09/2017.
  */
-class AppCamera16(context: Context) {
+class AppCamera16(val context: Context) {
     private val TAG = "Camera16"
 
     @Inject lateinit var rx: RxBus
@@ -38,15 +39,21 @@ class AppCamera16(context: Context) {
     private var surfaceTexture: SurfaceTexture? = null
 
     fun setupCamera() {
-        camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK)
+        try {
+            camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK)
+            surfaceTexture = SurfaceTexture(0)
+            cameraParameters = camera?.parameters
+            cameraParameters?.setPictureSize(preferences.getWidth(), preferences.getHeight())
+            cameraParameters?.setRotation(90)
+            camera?.parameters = cameraParameters
+            camera?.setErrorCallback(errorCallback)
+            takePicture()
+        } catch (e: RuntimeException) {
+            Toast.makeText(context, R.string.no_access_to_camera, Toast.LENGTH_LONG).show()
+            rx.send(ServiceControl.DESTROY)
+        }
 
-        surfaceTexture = SurfaceTexture(0)
-        cameraParameters = camera?.parameters
-        cameraParameters?.setPictureSize(preferences.getWidth(), preferences.getHeight())
-        cameraParameters?.setRotation(90)
-        camera?.parameters = cameraParameters
-        camera?.setErrorCallback(errorCallback)
-        takePicture()
+
     }
 
     fun takePicture() {

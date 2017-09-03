@@ -29,6 +29,8 @@ class CameraService : Service() {
 
     private val TAG = "CameraService"
 
+    private var pictureCount = 0
+
     @Inject lateinit var rx: RxBus
     @Inject lateinit var camera: AppCamera16
 
@@ -36,12 +38,14 @@ class CameraService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+
         (applicationContext as App).component.inject(this)
 
-        camera.setupCamera()
         subscribe()
-        showNotification()
 
+        showNotification(pictureCount)
+
+        camera.setupCamera()
     }
 
     private fun subscribe() {
@@ -53,7 +57,10 @@ class CameraService : Service() {
                             }
                             if(it is ServiceControl && it == ServiceControl.TAKE_PICTURE) {
                                 val timer = Timer("schedule", true)
-                                timer.schedule(1000) { camera.takePicture()}
+                                timer.schedule(1000) {
+                                    camera.takePicture()
+                                    showNotification(++pictureCount)
+                                }
                             }
                         }
         )
@@ -72,11 +79,11 @@ class CameraService : Service() {
         super.onDestroy()
     }
 
-    private fun showNotification() {
+    private fun showNotification(pictureCount: Int) {
         val notification = NotificationCompat.Builder(applicationContext)
                 .setSmallIcon(R.drawable.ic_photo_camera_white_24dp)
-                .setContentTitle("Taking pictures")
-                .setSubText("Sub text")
+                .setContentTitle(resources.getString(R.string.app_name))
+                .setContentText("Picture count : ${pictureCount}")
                 .build()
 
         startForeground(1337, notification)
