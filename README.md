@@ -1,13 +1,15 @@
 # WidgetCamera
 An app that taking pictures without opening camera
 
-<p align="center"><img src="https://raw.githubusercontent.com/dns21395/WidgetCamera/master/ReadmeFiles/logo.png" width="360" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/dns21395/WidgetCamera/master/ReadmeFiles/logo.png" width="768" /></p>
 
 Description
 -----
 
 I was wondering if the Android can take pictures without opening camera and decided to create this program. Curiosity heh. 
+
 RxJava, Dagger 2 really helped me to finish this program just for 2 days. 
+
 Actually Android have to connect to the camera, but anyway visually it looks like that app can take pictures without opening camera. 
 
 Select the resolution (default width=1920, height=1080)
