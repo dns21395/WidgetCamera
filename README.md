@@ -6,7 +6,9 @@ An app that taking pictures without opening camera
 Description
 -----
 
-I was wondering if the Android can take pictures without opening camera and decided to create this program. Curiosity heh. 
+I was wondering if the Android can take pictures without opening camera and decided to create this program. 
+
+*Curiosity heh.*
 
 RxJava, Dagger 2 really helped me to finish this program just for 2 days. 
 
