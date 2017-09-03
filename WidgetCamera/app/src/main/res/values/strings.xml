@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">WidgetCamera</string>
+    <string name="camera_resolution">Camera Resolution</string>
     <string name="another_app">Widget Camera has been closed. Camera is in use by another application</string>
 </resources>

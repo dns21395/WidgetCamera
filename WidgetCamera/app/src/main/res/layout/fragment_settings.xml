@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:paddingTop="88dp"
+        android:layout_centerInParent="true"
+        android:paddingBottom="72dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <TextView
-        android:text="settings"
+        android:layout_above="@id/recyclerView"
+        android:textColor="#FFF"
+        android:text="@string/camera_resolution"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:fontFamily="sans-serif-light"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-</LinearLayout>
+</RelativeLayout>
