@@ -5,16 +5,15 @@
 
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <RelativeLayout
         android:paddingTop="88dp"
-        android:layout_centerInParent="true"
         android:paddingBottom="72dp"
+        android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
 
     <TextView
-        android:layout_above="@id/recyclerView"
+        android:id="@+id/title"
         android:textColor="#FFF"
         android:text="@string/camera_resolution"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
@@ -22,5 +21,15 @@
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:paddingTop="28dp"
+        android:id="@+id/recyclerView"
+        android:layout_below="@id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

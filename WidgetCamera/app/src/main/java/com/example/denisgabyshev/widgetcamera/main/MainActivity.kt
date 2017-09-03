@@ -34,10 +34,10 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "permission granted : ${checkPermissionsIsGranted()}")
         if(checkPermissionsIsGranted()) {
             Log.d(TAG, "settingsFragment()")
-            supportFragmentManager.beginTransaction().replace(R.id.frameLayout, SettingsFragment()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.frameLayout, SettingsFragment()).commitNowAllowingStateLoss()
         } else {
             Log.d(TAG, "permissionFragment()")
-            supportFragmentManager.beginTransaction().replace(R.id.frameLayout, PermissionFragment()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.frameLayout, PermissionFragment()).commitNowAllowingStateLoss()
         }
     }
 

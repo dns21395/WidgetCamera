@@ -3,6 +3,7 @@ package com.example.denisgabyshev.widgetcamera.injection
 import com.example.denisgabyshev.widgetcamera.App
 import com.example.denisgabyshev.widgetcamera.main.MainActivity
 import com.example.denisgabyshev.widgetcamera.camera.AppCamera16
+import com.example.denisgabyshev.widgetcamera.main.settings.resolution.ResolutionAdapter
 import com.example.denisgabyshev.widgetcamera.service.CameraService
 import com.example.denisgabyshev.widgetcamera.widget.AppWidget
 import dagger.Component
@@ -18,4 +19,5 @@ interface AppComponent {
     fun inject(cameraService: CameraService)
     fun inject(appCamera16: AppCamera16)
     fun inject(appWidget: AppWidget)
+    fun inject(resolutionAdapter: ResolutionAdapter)
 }

@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
     @Provides @Singleton fun provideCamera() = AppCamera16(app)
 
-    @Provides @Singleton fun providePrefernces() = UserPreferences(app)
+    @Provides @Singleton fun providePreferences() = UserPreferences(app)
 
     @Provides @Singleton fun provideRx() = RxBus()
 }
