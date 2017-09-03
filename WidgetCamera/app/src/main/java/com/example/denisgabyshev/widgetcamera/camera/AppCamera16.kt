@@ -9,6 +9,10 @@ import com.example.denisgabyshev.widgetcamera.model.UserPreferences
 import org.jetbrains.anko.doAsync
 import javax.inject.Inject
 import android.os.Environment
+import android.widget.Toast
+import com.example.denisgabyshev.widgetcamera.R
+import com.example.denisgabyshev.widgetcamera.rx.RxBus
+import com.example.denisgabyshev.widgetcamera.service.ServiceControl
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -18,9 +22,10 @@ import java.util.*
 /**
  * Created by denisgabyshev on 01/09/2017.
  */
-class AppCamera16(context: Context)  {
+class AppCamera16(context: Context) {
     private val TAG = "Camera16"
 
+    @Inject lateinit var rx: RxBus
     @Inject lateinit var preferences: UserPreferences
 
     init {
@@ -40,6 +45,8 @@ class AppCamera16(context: Context)  {
         cameraParameters?.setPictureSize(preferences.getWidth(), preferences.getHeight())
         cameraParameters?.setRotation(90)
         camera?.parameters = cameraParameters
+        camera?.setErrorCallback(errorCallback)
+        takePicture()
     }
 
     fun takePicture() {
@@ -48,6 +55,11 @@ class AppCamera16(context: Context)  {
             camera?.startPreview()
             camera?.autoFocus { p0, p1 -> camera?.takePicture(null, null, pictureCallback) }
         }
+    }
+
+    private val errorCallback = Camera.ErrorCallback { p0, p1 ->
+        rx.send(ServiceControl.DESTROY)
+        Toast.makeText(context, R.string.another_app, Toast.LENGTH_LONG).show()
     }
 
     private val pictureCallback = Camera.PictureCallback { p0, p1 ->
@@ -61,6 +73,8 @@ class AppCamera16(context: Context)  {
         val fos = FileOutputStream(pictureFile)
         fos.write(p0)
         fos.close()
+
+        rx.send(ServiceControl.TAKE_PICTURE)
     }
 
     private fun getOutputMediaFile(): File? {

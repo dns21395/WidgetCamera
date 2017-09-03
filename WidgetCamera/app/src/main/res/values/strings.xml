@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WidgetCamera</string>
+    <string name="another_app">Widget Camera has been closed. Camera is in use by another application</string>
 </resources>

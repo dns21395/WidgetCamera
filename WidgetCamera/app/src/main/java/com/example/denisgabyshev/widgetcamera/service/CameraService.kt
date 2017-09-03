@@ -12,7 +12,9 @@ import com.example.denisgabyshev.widgetcamera.R
 import com.example.denisgabyshev.widgetcamera.camera.AppCamera16
 import com.example.denisgabyshev.widgetcamera.rx.RxBus
 import io.reactivex.disposables.CompositeDisposable
+import java.util.*
 import javax.inject.Inject
+import kotlin.concurrent.schedule
 
 /**
  * Created by Borya on 02.09.2017.
@@ -49,8 +51,13 @@ class CameraService : Service() {
                             if(it is ServiceControl && it == ServiceControl.DESTROY) {
                                 stopSelf()
                             }
+                            if(it is ServiceControl && it == ServiceControl.TAKE_PICTURE) {
+                                val timer = Timer("schedule", true)
+                                timer.schedule(1000) { camera.takePicture()}
+                            }
                         }
         )
+
     }
 
     override fun onBind(p0: Intent?): IBinder? {
@@ -74,5 +81,5 @@ class CameraService : Service() {
 
         startForeground(1337, notification)
     }
-
 }
+

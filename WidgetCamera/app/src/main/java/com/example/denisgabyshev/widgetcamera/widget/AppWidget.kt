@@ -53,9 +53,6 @@ class AppWidget : AppWidgetProvider() {
             vibrate(context)
             updateWidget(context)
         }
-
-
-
     }
 
     private fun getPendingIntent(context: Context?, action: String): PendingIntent {
